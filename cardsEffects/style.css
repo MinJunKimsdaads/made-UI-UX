@@ -41,7 +41,7 @@ body{
 }
 
 .card-char {
-    width: 100%;
+    width: 150%;
     opacity: 0;
     transform: all 0.5s;
     position: absolute;
