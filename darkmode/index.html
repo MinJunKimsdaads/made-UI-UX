@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav">
+        <div>
+            <span class="nav-link">
+                <i class="fas fa-bars"></i>
+            </span>
+        </div>
+        <div>
+            <span class="nav-link" onclick="switchMode()">
+                <i class="fas fa-moon dark-icon"></i>
+                <i class="fas fa-sun light-icon"></i>
+            </span>
+        </div>
+    </div>
+    <div class="wrap">
+        
+    </div>
+    <script>
+        const themeDark = 'dark';
+        const themeLight = 'light';
+        const body = document.getElementsByTagName('body')[0];
+
+        function getCurrentTheme() {
+            return localStorage.getItem('theme') || themeLight;
+        }
+
+        function saveCurrentTheme(theme) {
+            localStorage.setItem('theme', theme);
+        }
+
+        window.addEventListener('load', function() {
+            const currentTheme = getCurrentTheme();
+            body.classList.add(currentTheme);
+        });
+
+        function switchMode() {
+            if (body.classList.contains(themeLight)) {
+                body.classList.remove(themeLight);
+                body.classList.add(themeDark);
+                saveCurrentTheme(themeDark);
+            } else {
+                body.classList.remove(themeDark);
+                body.classList.add(themeLight);
+                saveCurrentTheme(themeLight);
+            }
+        }
+    </script>
+</body>
+</html>
