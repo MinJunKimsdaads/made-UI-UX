@@ -5,3 +5,7 @@
 <div>
   <a href='https://minjunkimsdaads.github.io/made-UI-UX/darkmode/index.html'>darkmode</a>
 </div>
+
+<div>
+  <a href='https://minjunkimsdaads.github.io/made-UI-UX/starRating/index.html'>starRating</a>
+</div>
