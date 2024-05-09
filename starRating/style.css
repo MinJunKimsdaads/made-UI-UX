@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 6rem;
+    background-color: black;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+.ratingwrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ratingTitle {
+    margin-right: 2rem;
+}
+
+.ratingStar{
+    position: relative;
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row-reverse;
+}
+
+.ratingStar input {
+    position: relative;
+    width: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    appearance: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.ratingStar input::before {
+    content: '\eeb8';
+    position: absolute;
+    font-family: boxicons;
+    font-size: 34px;
+    position: absolute;
+    left: 4px;
+    color: white;
+    transition: all .3s;
+}
+
+.ratingStar input:nth-child(2n + 1)::before {
+    right: 4px;
+    left: initial;
+}
+
+.ratingStar input:hover ~ input::before,
+.ratingStar input:hover::before,
+.ratingStar input:checked ~ input::before,
+.ratingStar input:checked::before {
+    color: #ffeb3b;
+}
+
