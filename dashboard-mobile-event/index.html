@@ -6,16 +6,60 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="wrap">
-        <div class="nav"></div>
+        <div class="nav">
+            <div class="nav_top">
+                <i class="bx bx-x" onClick="closeNav();"></i>
+            </div>
+            <div class="nav_menu_box">
+                <div class="nav_menu">
+                    <i class='bx bx-home-alt'></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav_menu">
+                    <i class='bx bx-cube'></i>
+                    <span>Products</span>
+                </div>
+                <div class="nav_menu">
+                    <i class='bx bx-user'></i>
+                    <span>Customers</span>
+                </div>
+                <div class="nav_menu">
+                    <i class='bx bx-cog'></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
         <div class="dashboard">
-            <div></div>
+            <div class="dashboard_top">
+                <div class="user_info"></div>
+                <i class='bx bx-menu-alt-right' onClick="openNav();"></i>
+            </div>
+            <div class="dashboard_wrap">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
+    <script>
+        const closeNav = () => {
+            document.querySelector('.dashboard').style.transform = 'scale(1) translateX(0)';
+            setTimeout(() => {
+                document.body.classList.remove('openedNav')
+                document.querySelector('.dashboard').style = ''
+            }, 500);
+        }
+
+        const openNav = () => {
+            document.body.classList.add('openedNav');
+        }
+    </script>
 </body>
 </html>
