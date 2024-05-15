@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="kanban"></div>
+    <script>
+        const kanbanContainer = document.getElementById('kanban');
+        const data =  [
+            {
+                title: ' 📃 To do',
+                id: 'todo',
+                tasks: [
+                    {
+                        id: 'learn_js',
+                        title: 'Learn JavaScript'
+                    },
+                    {
+                        id: 'learn_git',
+                        title: 'Learn Git'
+                    },
+                    {
+                        id: 'learn_python',
+                        title: 'Learn Python'
+                    },
+                ]
+            },
+            {
+                title: ' ✏️ In progress',
+                id: 'in_progress',
+                tasks: [
+                    {
+                        id: 'learn_css',
+                        title: 'Learn CSS'
+                    },
+                    {
+                        id: 'learn_golang',
+                        title: 'Learn Golang'
+                    }
+                ]
+            },
+            {
+                title: ' ✔️ Completed',
+                id: 'completed',
+                tasks: [
+                    {
+                        id: 'learn_html',
+                        title: 'Learn HTML'
+                    }
+                ]
+            }
+        ];
+
+        function onDragStart(event) {
+            const taskId = event.target.dataset.draggableId;
+            const sourceColId = event.target.closest('.kanban__section').dataset.droppableId;
+            event.dataTransfer.setData('text/plain', taskId);
+            event.dataTransfer.setData('sourceColumnId', sourceColId); // 소스 열의 ID 저장
+        }
+        function onDragOver(event) {
+            event.preventDefault();
+        }
+
+        function onDragEnter(event) {
+            event.preventDefault();
+            event.target.classList.add('kanban__task--over');
+        }
+
+        function onDragLeave(event) {
+            event.target.classList.remove('kanban__task--over');
+        }
+
+        function onDrop(event) {
+            event.preventDefault();
+            event.target.classList.remove('kanban__task--over');
+            const taskId = event.dataTransfer.getData('text/plain');
+            const sourceColId = event.dataTransfer.getData('sourceColumnId');
+            const destinationColId = event.target.closest('.kanban__section').dataset.droppableId;
+
+            const sourceColIndex = data.findIndex(e => e.id === sourceColId);
+            const destinationColIndex = data.findIndex(e => e.id === destinationColId);
+
+            // Check if the destination column has tasks property
+            if (destinationColIndex === -1 || !data[destinationColIndex].hasOwnProperty('tasks')) {
+                return; // Stop execution if tasks property is not available
+            }
+
+            const sourceCol = data[sourceColIndex];
+            const destinationCol = data[destinationColIndex];
+
+            const sourceTask = [...sourceCol.tasks];
+            const destinationTask = [...destinationCol.tasks];
+
+            const taskToMove = sourceTask.find(task => task.id === taskId);
+
+            if (destinationTask.find(task => task.id === taskId)) {
+                return; // Stop execution if the task already exists in the destination
+            }
+
+            sourceTask.splice(sourceTask.indexOf(taskToMove), 1);
+            destinationTask.splice(parseInt(event.target.dataset.index), 0, taskToMove);
+
+            data[sourceColIndex].tasks = sourceTask;
+            data[destinationColIndex].tasks = destinationTask;
+
+            renderKanban();
+        }
+
+        function renderKanban() {
+            kanbanContainer.innerHTML = '';
+            const dragDropContext = document.createElement('div');
+            dragDropContext.classList.add('kanban');
+            kanbanContainer.appendChild(dragDropContext);
+
+            data.forEach(section => {
+                const droppableContainer = document.createElement('div');
+                droppableContainer.classList.add('kanban__section');
+                droppableContainer.setAttribute('data-droppable-id', section.id);
+
+                const sectionTitle = document.createElement('div');
+                sectionTitle.classList.add('kanban__section__title');
+                sectionTitle.innerText = section.title;
+                droppableContainer.appendChild(sectionTitle);
+
+                droppableContainer.addEventListener('dragover', onDragOver);
+                droppableContainer.addEventListener('dragenter', onDragEnter);
+                droppableContainer.addEventListener('dragleave', onDragLeave);
+                droppableContainer.addEventListener('drop', onDrop);
+
+                const sectionContent = document.createElement('div');
+                sectionContent.classList.add('kanban__section__content');
+
+                section.tasks.forEach((task, index) => {
+                    const draggableItem = document.createElement('div');
+                    draggableItem.classList.add('kanban__task');
+                    draggableItem.setAttribute('data-draggable-id', task.id);
+                    draggableItem.setAttribute('draggable', true);
+                    draggableItem.dataset.index = index;
+
+                    draggableItem.innerText = task.title;
+
+                    draggableItem.addEventListener('dragstart', onDragStart);
+
+                    sectionContent.appendChild(draggableItem);
+                });
+
+                droppableContainer.appendChild(sectionContent);
+                dragDropContext.appendChild(droppableContainer);
+            });
+        }
+
+        renderKanban();
+    </script>
+</body>
+</html>
