@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #393939;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    font-family: 'Roboto', sans-serif;
+    border: 0;
+    outline: 0;
+    background-color: #1976d2;
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out; /* Changed transition property */
+}
+
+.btn:hover {
+    background-color: #2b92f7;
+}
+
+.btn .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out, margin-right 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Changed transition properties */
+    opacity: 0;
+    visibility: hidden;
+}
+
+.btn .spinner.active {
+    width: 19px;
+    margin-right: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+.btn .txt {
+    flex-grow: 1;
+}

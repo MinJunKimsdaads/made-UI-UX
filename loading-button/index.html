@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrap">
+        <button class="btn" onclick="isLoading();">
+            <span id="loading" class="spinner">
+                <i class='bx bx-loader-alt bx-spin'></i>
+            </span>
+            Loading
+        </button>
+    </div>
+    <script>
+        const loading = document.getElementById('loading');
+
+        function hasClass(element, className) {
+            return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+        }
+
+        const isLoading = () => {
+            if(hasClass(loading, 'active')){
+                loading.classList.remove('active');
+            }else{
+                loading.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
