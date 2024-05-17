@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tilt">
+        <div class="tilt__content">
+            <img src="./assets/image.jpg" alt="">
+        </div>
+    </div>
+   <script>
+        const tiltEls = document.querySelectorAll('.tilt')
+
+        const tiltMove = (x, y) => `perspective(500px) scale(1.1) rotateX(${x}deg) rotateY(${y}deg)`
+
+        tiltEls.forEach(tilt => {
+            const height = tilt.clientHeight
+            const width = tilt.clientWidth
+
+            tilt.addEventListener('mousemove', (e) => {
+                const x = e.layerX
+                const y = e.layerY
+                const multiplier = 50
+
+                const xRotate = multiplier * ((x - width / 2) / width)
+                const yRotate = -multiplier * ((y - height / 2) / height)
+
+                tilt.style.transform = tiltMove(xRotate, yRotate)
+            })
+
+            tilt.addEventListener('mouseout', () => tilt.style.transform = tiltMove(0, 0))
+        })
+   </script>
+</body>
+</html>
