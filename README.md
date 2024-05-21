@@ -19,3 +19,6 @@
 <div>
   <a href='https://minjunkimsdaads.github.io/made-UI-UX/hover-moving/index.html'>hover-moving</a>
 </div>
+<div>
+  <a href='https://minjunkimsdaads.github.io/made-UI-UX/animated-sidebar/index.html'>animated-sidebar</a>
+</div>

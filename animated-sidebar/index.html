@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="wrap">
+        <div class="sidebar">
+            <div class="sidebar__logo">Logo</div>
+            <div class="sidebar__menu" id="sidebarMenu">
+                <div class="sidebar__menu__indicator" id="indicator"></div>
+            </div>
+        </div>
+        <div id="content">
+            
+        </div>
+    </div>
+    
+   <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarNavItems = [
+                {
+                    display: 'Dashboard',
+                    icon: '<i class="bx bx-home"></i>',
+                    section: ''
+                },
+                {
+                    display: 'Getting Started',
+                    icon: '<i class="bx bx-star"></i>',
+                    section: 'started'
+                },
+                {
+                    display: 'Calendar',
+                    icon: '<i class="bx bx-calendar"></i>',
+                    section: 'calendar'
+                },
+                {
+                    display: 'User',
+                    icon: '<i class="bx bx-user"></i>',
+                    section: 'user'
+                },
+                {
+                    display: 'Orders',
+                    icon: '<i class="bx bx-receipt"></i>',
+                    section: 'order'
+                },
+            ];
+
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const indicator = document.getElementById('indicator');
+            let activeIndex = 0;
+            let stepHeight = 0;
+
+            function updateIndicatorPosition() {
+                indicator.style.height = `${stepHeight}px`;
+                indicator.style.transform = `translateX(-50%) translateY(${activeIndex * stepHeight}px)`;
+            }
+
+            function setActiveItem(index) {
+                activeIndex = index;
+                updateIndicatorPosition();
+                document.querySelectorAll('.sidebar__menu__item').forEach((item, idx) => {
+                    if (idx === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            sidebarNavItems.forEach((item, index) => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'sidebar__menu__item';
+                if (index === activeIndex) menuItem.classList.add('active');
+                menuItem.innerHTML = `
+                    <div class="sidebar__menu__item__icon">${item.icon}</div>
+                    <div class="sidebar__menu__item__text">${item.display}</div>
+                `;
+                menuItem.addEventListener('click', () => {
+                    setActiveItem(index);
+                });
+                sidebarMenu.appendChild(menuItem);
+            });
+
+            setTimeout(() => {
+                const firstMenuItem = document.querySelector('.sidebar__menu__item');
+                stepHeight = firstMenuItem.clientHeight;
+                updateIndicatorPosition();
+            }, 50);
+        });
+   </script>
+</body>
+</html>
