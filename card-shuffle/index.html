@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="shuffle-button">Shuffle Cards</button>
+    <div id="card-container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cardContainer = document.getElementById("card-container");
+            const shuffleButton = document.getElementById("shuffle-button");
+            const numCards = 22;
+            const cards = [];
+
+            // 카드 22개를 생성하여 추가
+            for (let i = 1; i <= numCards; i++) {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                
+                const cardInner = document.createElement("div");
+                cardInner.classList.add("card-inner");
+                
+                const cardFront = document.createElement("div");
+                cardFront.classList.add("card-front");
+                cardFront.innerText = `Front ${i}`;
+                
+                const cardBack = document.createElement("div");
+                cardBack.classList.add("card-back");
+                cardBack.innerText = `Back ${i}`;
+                
+                cardInner.appendChild(cardFront);
+                cardInner.appendChild(cardBack);
+                card.appendChild(cardInner);
+                cardContainer.appendChild(card);
+                cards.push(card);
+            }
+
+            // 카드를 섞는 함수
+            function shuffleCards() {
+                // 모든 카드를 중앙으로 모으는 애니메이션
+                cards.forEach((card, index) => {
+                    card.style.left = `50%`;
+                    card.style.top = `50%`;
+                    card.style.transform = `translate(-50%, -50%)`;
+                });
+
+                // 모인 후에 셔플 실행
+                setTimeout(() => {
+                    const positions = cards.map(card => {
+                        return {
+                            left: card.style.left,
+                            top: card.style.top
+                        };
+                    });
+
+                    for (let i = cards.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [positions[i], positions[j]] = [positions[j], positions[i]];
+                    }
+
+                    cards.forEach((card, index) => {
+                        const col = index % 6;
+                        const row = Math.floor(index / 6);
+                        const left = col * (card.offsetWidth + 20) + 'px';
+                        const top = row * (card.offsetHeight + 20) + 'px';
+                        card.style.left = left;
+                        card.style.top = top;
+                        card.style.transform = `translate(0, 0)`;
+                    });
+                }, 600); // 중앙으로 모이는 애니메이션 시간과 일치시킴
+            }
+
+            // 버튼 클릭 시 카드 섞기
+            shuffleButton.addEventListener("click", shuffleCards);
+        });
+    </script>
+</body>
+</html>
