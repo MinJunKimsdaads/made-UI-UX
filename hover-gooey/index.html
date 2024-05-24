@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="btn">
+        <span class="btn-txt"></span>
+        <span class="btn-goo-box"></span>
+        <span class="btn-goo-box"></span>
+        <span class="btn-goo-box"></span>
+    </button>
+    <script>
+        const btns = document.querySelectorAll('.btn');
+        btns.forEach(btn => {
+            btn.addEventListener('mouseover', () => {
+                const gooBoxes = btn.querySelectorAll('.btn-goo-box');
+                gooBoxes.forEach(box => {
+                    const randomSize = Math.floor(Math.random() * 50) + 20;
+                    const btnRect = btn.getBoundingClientRect();
+                    let randomLeft;
+                    if (Math.random() < 0.5) {
+                        randomLeft = Math.floor(Math.random() * (20 - (-100))) - 100;
+                    } else {
+                        randomLeft = Math.floor(Math.random() * (150 - 110)) + 110;
+                    }
+                    const randomTop = Math.floor(Math.random() * (btnRect.height - randomSize));
+                    box.style.width = randomSize + 'px';
+                    box.style.height = randomSize + 'px';
+                    box.style.top = randomTop + 'px';
+                    box.style.left = randomLeft + 'px';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

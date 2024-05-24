@@ -28,3 +28,6 @@
 <div>
   <a href='https://minjunkimsdaads.github.io/made-UI-UX/card-shuffle/index.html'>card-shuffle</a>
 </div>
+<div>
+  <a href='https://minjunkimsdaads.github.io/made-UI-UX/hover-gooey/index.html'>hover-gooey</a>
+</div>

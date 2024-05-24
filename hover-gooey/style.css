@@ -1,0 +1,53 @@
+:root {
+    --main-color: #e84393;
+    --body-bg: #fff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: cursive;
+    background-color: var(--body-bg);
+}
+
+#filter-svg {
+    display: none;
+}
+
+.btn {
+    width: 150px;
+    height: 150px;
+    border: none;
+    outline: none;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: cursive;
+    cursor: pointer;
+    background-color: var(--main-color);
+    color: #fff;
+    filter: url(#goo);
+    position: relative;
+}
+
+.btn .btn-goo-box {
+    border-radius: 50%;
+    position: absolute;
+    background-color: var(--main-color);
+    transition: all 0.5s cubic-bezier(0.75, 0.32, 0, 0.93);
+}
+
+.btn .btn-txt {
+    z-index: 2; /* btn-goo-box 위로 올라오도록 설정 */
+}
+
+.btn:hover .btn-goo-box {
+    transform: translate(-50%, -50%);
+}
