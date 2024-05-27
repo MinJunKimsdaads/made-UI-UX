@@ -31,3 +31,6 @@
 <div>
   <a href='https://minjunkimsdaads.github.io/made-UI-UX/hover-gooey/index.html'>hover-gooey</a>
 </div>
+<div>
+  <a href='https://minjunkimsdaads.github.io/made-UI-UX/password-toggle-input/index.html'>password-toggle-input</a>
+</div>
