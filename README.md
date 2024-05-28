@@ -34,3 +34,6 @@
 <div>
   <a href='https://minjunkimsdaads.github.io/made-UI-UX/password-toggle-input/index.html'>password-toggle-input</a>
 </div>
+<div>
+  <a href='https://minjunkimsdaads.github.io/made-UI-UX/btn-animation/index.html'>btn-animation</a>
+</div>
